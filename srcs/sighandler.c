@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_select.h                                        :+:      :+:    :+:   */
+/*   sighandler.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/25 11:18:16 by edhommee          #+#    #+#             */
-/*   Updated: 2017/09/28 17:06:49 by edhommee         ###   ########.fr       */
+/*   Created: 2017/09/28 16:38:24 by edhommee          #+#    #+#             */
+/*   Updated: 2017/09/28 17:07:14 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT_H
-# define FT_SELECT_H
+#include <ft_select.h>
 
-# include <libft.h>
-# include <termcap.h>
-# include <termios.h>
-# include <term.h>
-
-void		raw_term(void);
-void		default_term(void);
-void		sig_handler(int signo);
-
-#endif
+void		sig_handler(int signo)
+{
+	if (signo == SIGINT)
+	{
+		default_term();
+		exit(0);
+	}
+}

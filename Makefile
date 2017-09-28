@@ -16,7 +16,7 @@ CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
 SRC_DIR		= ./srcs/
-SRC_NAME	= main.c
+SRC_NAME	= main.c sighandler.c
 
 SRC			= $(addprefix $(SRC_DIR),$(SRC_NAME))
 
