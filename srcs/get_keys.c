@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_list.c                                         :+:      :+:    :+:   */
+/*   get_keys.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/03 18:29:32 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/10 18:18:53 by edhommee         ###   ########.fr       */
+/*   Created: 2017/10/10 18:35:31 by edhommee          #+#    #+#             */
+/*   Updated: 2017/10/10 19:04:00 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-t_list		*get_list(char **args)
+int		is_up(char *key)
 {
-	t_list		*begin;
-	t_content	*tmp;
-	int			i;
+	char	*arrow;
 
-	i = 0;
-	while (args[i])
-	{
-		tmp = new_content(args[i]);
-		ft_list_push_back(&begin, tmp);
-		i++;
-	}
-	return (begin);
+	arrow = tgetstr("ku", NULL);
+	arrow[1] = 91;
+	if (ft_memcmp((void*)arrow, (void*)key, ft_strlen(arrow)) == 0)
+		return (1);
+	return (0);
 }

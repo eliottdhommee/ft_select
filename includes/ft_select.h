@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:18:16 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/03 18:28:58 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/10 18:54:30 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,16 @@ typedef struct	s_content
 	int			is_selected;
 }				t_content;
 
+t_list		*get_list(char **args);
 void		raw_term(void);
 void		default_term(void);
 int			putchar_tput(int c);
 void		sig_handler(int signo);
-void		print_col(char **args, t_term var);
-int			max_len(char **args);
+void		print_col(t_list *begin, t_term var);
+int			max_len(t_list *begin);
 t_term		init_var(void);
 void		ft_nup(int i, t_term var);
+t_content	*new_content(char *name);
+int			is_up(char *key);
 
 #endif

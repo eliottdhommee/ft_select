@@ -6,24 +6,22 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 14:58:33 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/03 18:01:52 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/10 18:26:07 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-int			max_len(char **args)
+int			max_len(t_list *begin)
 {
-	int		i;
 	size_t	max;
 
-	i = 0;
 	max = 0;
-	while (args[i])
+	while (begin)
 	{
-		if (ft_strlen(args[i]) > max)
-			max = ft_strlen(args[i]);
-		i++;
+		if (ft_strlen(((t_content*)begin->data)->name) > max)
+			max = ft_strlen(((t_content*)begin->data)->name);
+		begin = begin->next;
 	}
 	return (max + 1);
 }
@@ -33,29 +31,30 @@ int			putchar_tput(int c)
 	return (write(1, &c, 1));
 }
 
-t_term		update_var(char **args, t_term var)
+t_term		update_var(t_list *begin, t_term var)
 {
-	var.max_len = max_len(args);
+	var.max_len = max_len(begin);
 	var.col = tgetnum("co") / var.max_len;
-	var.line = ft_tablen(args) / var.col;
-	if (ft_tablen(args) % var.col > 0)
+	var.line = ft_list_size(begin) / var.col;
+	if (ft_list_size(begin) % var.col > 0)
 		var.line++;
 	return (var);
 }
 
-void		print_col(char **args, t_term var)
+void		print_col(t_list *begin, t_term var)
 {
 	int		i;
 	int		j;
+	t_list	*tmp;
 
-	var = update_var(args, var);
+	var = update_var(begin, var);
 	i = 0;
 	while (i < var.line)
 	{
 		j = 0;
-		while (j < var.col && args[i + j * var.line])
+		while (j < var.col && (tmp = ft_list_at(begin,1 + i + j * var.line)))
 		{
-			ft_printf("%-*s", var.max_len + 1, args[i + j * var.line]);
+			ft_printf("%-*s", var.max_len + 1, ((t_content*)tmp->data)->name);
 			j++;
 		}
 		ft_putchar('\n');
