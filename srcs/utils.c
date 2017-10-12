@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 14:58:33 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/10 18:26:07 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/12 18:56:10 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,20 @@ int			putchar_tput(int c)
 	return (write(1, &c, 1));
 }
 
-t_term		update_var(t_list *begin, t_term var)
+t_term		*update_var(t_list *begin, t_term *var)
 {
-	var.max_len = max_len(begin);
-	var.col = tgetnum("co") / var.max_len;
-	var.line = ft_list_size(begin) / var.col;
-	if (ft_list_size(begin) % var.col > 0)
-		var.line++;
+	int		size;
+
+	size = ft_lstsize(begin);
+	var->max_len = max_len(begin);
+	var->col = tgetnum("co") / var->max_len;
+	var->line = size / var->col;
+	if (size % var->col > 0)
+		var->line++;
 	return (var);
 }
 
-void		print_col(t_list *begin, t_term var)
+void		print_col(t_list *begin, t_term *var)
 {
 	int		i;
 	int		j;
@@ -49,18 +52,16 @@ void		print_col(t_list *begin, t_term var)
 
 	var = update_var(begin, var);
 	i = 0;
-	while (i < var.line)
+	while (i < var->line)
 	{
 		j = 0;
-		while (j < var.col && (tmp = ft_list_at(begin,1 + i + j * var.line)))
+		while (j < var->col && (tmp = ft_list_at(begin, 1 + i + j * var->line)))
 		{
-			ft_printf("%-*s", var.max_len + 1, ((t_content*)tmp->data)->name);
+			ft_printf("%-*s", var->max_len + 1, ((t_content*)tmp->data)->name);
 			j++;
 		}
-		ft_putchar('\n');
-		var.pos_y++;
+		var = ft_curdwn(var);
 		tputs(tgetstr("cr", NULL), 0, putchar_tput);
 		i++;
 	}
-	ft_nup(var.line, var);
 }

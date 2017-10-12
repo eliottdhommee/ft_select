@@ -17,7 +17,7 @@ CFLAGS		= -Wall -Wextra -Werror
 
 SRC_DIR		= ./srcs/
 SRC_NAME	= main.c sighandler.c utils.c init.c ft_move.c get_list.c\
-			  get_keys.c
+			  get_keys.c get_arrows.c
 
 SRC			= $(addprefix $(SRC_DIR),$(SRC_NAME))
 
@@ -33,7 +33,7 @@ LIB_LINK	= -Llibft -lft
 all: $(NAME)
 
 $(NAME): obj $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) -ltermcap $(LIB_LINK) -o $(NAME) $(OBJ)
+	$(CC) $(CFLAGS) -ltermcap $(LIB_LINK) -o $(NAME) $(OBJ) -fsanitize=address
 
 obj:
 	mkdir -p $(OBJ_DIR)
