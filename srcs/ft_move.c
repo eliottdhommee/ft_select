@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 17:54:38 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/12 18:37:48 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/13 17:40:18 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ t_term		*ft_cursup(t_term *var)
 
 t_term		*ft_curdwn(t_term *var)
 {
-	if (var->pos_y < var->line)
+	if (var->pos_y < var->line - 1)
 	{
-		tputs(tgetstr("hd", NULL), 0, putchar_tput);
+		tputs(tgetstr("do", NULL), 0, putchar_tput);
 		var->pos_y++;
 	}
 	return (var);
@@ -34,9 +34,13 @@ t_term		*ft_curdwn(t_term *var)
 
 t_term		*ft_curleft(t_term *var)
 {
+	int		i;
+
+	i = var->max_len + 1;
 	if (var->pos_x > 0)
 	{
-		tputs(tgetstr("kl", NULL), 0, putchar_tput);
+		while (i--)
+			tputs(tgetstr("le", NULL), 0, putchar_tput);
 		var->pos_x--;
 	}
 	return (var);
@@ -44,10 +48,14 @@ t_term		*ft_curleft(t_term *var)
 
 t_term		*ft_curright(t_term *var)
 {
-	if (var->pos_x < var->col)
+	int		i;
+
+	i = var->max_len + 1;
+	if (var->pos_x < var->col - 1)
 	{
-		tputs(tgetstr("kl", NULL), 0, putchar_tput);
-		var->pos_x--;
+		while (i--)
+			tputs(tgetstr("nd", NULL), 0, putchar_tput);
+		var->pos_x++;
 	}
 	return (var);
 }

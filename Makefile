@@ -17,7 +17,7 @@ CFLAGS		= -Wall -Wextra -Werror
 
 SRC_DIR		= ./srcs/
 SRC_NAME	= main.c sighandler.c utils.c init.c ft_move.c get_list.c\
-			  get_keys.c get_arrows.c
+			  get_keys.c get_arrows.c ft_moveword.c printwords.c
 
 SRC			= $(addprefix $(SRC_DIR),$(SRC_NAME))
 

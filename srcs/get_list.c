@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 18:29:32 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/12 17:21:34 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/13 15:12:28 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_list		*get_list(char **args)
 	int			i;
 
 	i = 0;
+	begin = NULL;
 	while (args[i])
 	{
 		tmp = new_content(args[i]);

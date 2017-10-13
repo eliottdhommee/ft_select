@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:22:53 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/12 18:52:10 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/13 16:44:01 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			main(int argc, char **argv)
 	{
 		ft_bzero(buf, 6);
 		read(0, buf, 6);
-		get_keys(buf, var);
+		var = get_keys(buf, var);
 	}
 	default_term();
 	return (0);

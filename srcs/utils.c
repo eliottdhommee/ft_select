@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 14:58:33 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/12 18:56:10 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/13 17:12:27 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,4 @@ t_term		*update_var(t_list *begin, t_term *var)
 	if (size % var->col > 0)
 		var->line++;
 	return (var);
-}
-
-void		print_col(t_list *begin, t_term *var)
-{
-	int		i;
-	int		j;
-	t_list	*tmp;
-
-	var = update_var(begin, var);
-	i = 0;
-	while (i < var->line)
-	{
-		j = 0;
-		while (j < var->col && (tmp = ft_list_at(begin, 1 + i + j * var->line)))
-		{
-			ft_printf("%-*s", var->max_len + 1, ((t_content*)tmp->data)->name);
-			j++;
-		}
-		var = ft_curdwn(var);
-		tputs(tgetstr("cr", NULL), 0, putchar_tput);
-		i++;
-	}
 }

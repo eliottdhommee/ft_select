@@ -6,13 +6,13 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/10 18:35:31 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/12 18:50:05 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/13 15:22:25 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-int		get_keys(char *str , t_term *var)
+t_term		*get_keys(char *str , t_term *var)
 {
 	if (is_up(str))
 		var = ft_cursup(var);
@@ -32,5 +32,5 @@ int		get_keys(char *str , t_term *var)
 		ft_printf("backspace\n");
 	else if (ft_memcmp((void*)KEY_DEL, (void*)str, 6) == 0)
 		ft_printf("delete\n");
-	return (0);
+	return (var);
 }

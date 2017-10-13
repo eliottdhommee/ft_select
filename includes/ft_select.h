@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:18:16 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/12 18:46:23 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/13 17:35:45 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ void		default_term(void);
 void		sig_handler(int signo);
 int			putchar_tput(int c);
 t_list		*get_list(char **args);
-void		print_col(t_list *begin, t_term *var);
+t_term		*print_one(t_content *data, t_term *var, int opt);
+t_term		*print_col(t_list *begin, t_term *var);
 int			max_len(t_list *begin);
 t_term		*init_var(void);
+t_term		*update_var(t_list *begin, t_term *var);
 t_content	*new_content(char *name);
-int			get_keys(char *str, t_term *var);
+t_term		*get_keys(char *str, t_term *var);
 int			is_up(char *key);
 int			is_down(char *key);
 int			is_left(char *key);
@@ -56,5 +58,8 @@ t_term		*ft_cursup(t_term *var);
 t_term		*ft_curdwn(t_term *var);
 t_term		*ft_curleft(t_term *var);
 t_term		*ft_curright(t_term *var);
+t_term		*ft_goto(t_term *var, int x, int y);
+t_term		*beginline(t_term *var);
+t_term		*upnleft(t_term *var);
 
 #endif
