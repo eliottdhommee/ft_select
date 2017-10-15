@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:22:53 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/13 16:44:01 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/15 19:52:58 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,6 @@ void		default_term(void)
 	tcsetattr(0, TCSADRAIN, &tattr);
 }
 
-void		printkey(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (i < 6)
-	{
-		ft_printf("[%x]", str[i]);
-		i++;
-	}
-	ft_putchar('\n');
-}
-
 int			main(int argc, char **argv)
 {
 	char		buf[6];
@@ -58,13 +45,14 @@ int			main(int argc, char **argv)
 	var = init_var();
 	begin_list = get_list(&argv[1]);
 	print_col(begin_list, var);
-	if (signal(SIGINT, sig_handler) == SIG_ERR)
+	if (signal(SIGINT , sig_handler) == SIG_ERR ||
+			signal(SIGWINCH, sig_handler == SIG_ERR))
 		ft_printf("error");
 	while (argc)
 	{
 		ft_bzero(buf, 6);
 		read(0, buf, 6);
-		var = get_keys(buf, var);
+		var = get_keys(buf, var, &begin_list);
 	}
 	default_term();
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 16:38:24 by edhommee          #+#    #+#             */
-/*   Updated: 2017/09/28 17:07:14 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/15 19:54:03 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,8 @@ void		sig_handler(int signo)
 	{
 		default_term();
 		exit(0);
+	}
+	else if (signo == SIGWINCH)
+	{
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 16:57:14 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/13 17:36:11 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/15 19:54:17 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ t_term		*print_one(t_content *data, t_term *var, int opt)
 	return (var);
 }
 
+t_term		*reprint(t_list *begin, t_term *var)
+{
+	var = upnleft(var);
+	tputs(tgetstr("cd", NULL), 0, putchar_tput);
+	var = print_col(*list, var);
+	return (var);
+}
+
 t_term		*print_col(t_list *begin, t_term *var)
 {
 	int		i;
@@ -38,7 +46,7 @@ t_term		*print_col(t_list *begin, t_term *var)
 		j = 0;
 		while (j < var->col && (tmp = ft_list_at(begin, 1 + i + j * var->line)))
 		{
-			var = print_one((t_content*)tmp->data, var, 1);
+			var = print_one((t_content*)tmp->data, var, 0);
 			j++;
 		}
 		if (i != var->line - 1)

@@ -6,11 +6,21 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 17:34:14 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/12 18:45:52 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/15 19:30:32 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
+
+void		del_content(void *content)
+{
+	if (content)
+	{
+		ft_strdel(&((t_content*)content)->name);
+		free(content);
+		content = NULL;
+	}
+}
 
 t_content	*new_content(char *name)
 {
@@ -28,6 +38,7 @@ t_term		*init_var(void)
 	t_term		*var;
 
 	var = ft_memalloc(sizeof(t_term*));
+	var->size = 0;
 	var->col = 0;
 	var->line = 0;
 	var->pos_x = 0;
