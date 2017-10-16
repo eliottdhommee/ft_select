@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:22:53 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/15 19:52:58 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/16 19:20:15 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		raw_term(void)
 	tattr.c_lflag &= ~( ECHO | ICANON );
 	tattr.c_oflag &= ~( OPOST );
 	tattr.c_cc[VMIN] = 1;
-	tattr.c_cc[VTIME] = 0;
+	tattr.c_cc[VTIME] = 1;
 	tcsetattr(0, TCSADRAIN, &tattr);
 	tgetent(NULL, ft_getenv("TERM"));
 }
@@ -35,25 +35,41 @@ void		default_term(void)
 	tcsetattr(0, TCSADRAIN, &tattr);
 }
 
-int			main(int argc, char **argv)
+int			ft_select(char **arg)
 {
-	char		buf[6];
-	t_term		*var;
-	t_list		*begin_list;
+	char				buf[6];
+	static t_term		*var = NULL;
+	static t_list		*begin_list = NULL;
 
-	raw_term();
-	var = init_var();
-	begin_list = get_list(&argv[1]);
+	if (!var)
+		var = init_var();
+	else
+	{
+		var = upnleft(var);
+		tputs(tgetstr("cd", NULL), 0, putchar_tput);
+	}
+	if (!begin_list)
+		begin_list = get_list(arg);
 	print_col(begin_list, var);
-	if (signal(SIGINT , sig_handler) == SIG_ERR ||
-			signal(SIGWINCH, sig_handler == SIG_ERR))
-		ft_printf("error");
-	while (argc)
+	while (1)
 	{
 		ft_bzero(buf, 6);
 		read(0, buf, 6);
 		var = get_keys(buf, var, &begin_list);
 	}
+	return (0);
+}
+
+int			main(int argc, char **argv)
+{
+	if (argc < 2)
+		return (0);
+	raw_term();
+	if (signal(SIGINT , sig_handler) == SIG_ERR)
+		ft_printf("error");
+	if (signal(SIGWINCH, sig_handler) == SIG_ERR)
+		ft_printf("error");
+	ft_select(&argv[1]);
 	default_term();
 	return (0);
 }

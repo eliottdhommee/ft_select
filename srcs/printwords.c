@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 16:57:14 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/15 19:54:17 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/16 19:11:27 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_term		*reprint(t_list *begin, t_term *var)
 {
 	var = upnleft(var);
 	tputs(tgetstr("cd", NULL), 0, putchar_tput);
-	var = print_col(*list, var);
+	var = print_col(begin, var);
 	return (var);
 }
 

@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:18:16 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/15 19:48:30 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/16 19:10:32 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_content
 	int			is_selected;
 }				t_content;
 
+int			ft_select(char **arg);
 void		raw_term(void);
 void		default_term(void);
 int			putchar_tput(int c);
