@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:22:53 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/16 19:20:15 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/19 12:44:23 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		raw_term(void)
 	tattr.c_lflag &= ~( ECHO | ICANON );
 	tattr.c_oflag &= ~( OPOST );
 	tattr.c_cc[VMIN] = 1;
-	tattr.c_cc[VTIME] = 1;
+	tattr.c_cc[VTIME] = 0;
 	tcsetattr(0, TCSADRAIN, &tattr);
 	tgetent(NULL, ft_getenv("TERM"));
 }
@@ -38,21 +38,19 @@ void		default_term(void)
 int			ft_select(char **arg)
 {
 	char				buf[6];
-	static t_term		*var = NULL;
-	static t_list		*begin_list = NULL;
+	t_term		*var;
+	t_list		*begin_list;
 
-	if (!var)
-		var = init_var();
-	else
-	{
-		var = upnleft(var);
-		tputs(tgetstr("cd", NULL), 0, putchar_tput);
-	}
-	if (!begin_list)
-		begin_list = get_list(arg);
+	var = init_var();
+	begin_list = get_list(arg);
 	print_col(begin_list, var);
 	while (1)
 	{
+		if (g_win == 1)
+		{
+			g_win = 0;
+			var = reprint(begin_list, var);
+		}
 		ft_bzero(buf, 6);
 		read(0, buf, 6);
 		var = get_keys(buf, var, &begin_list);
@@ -65,9 +63,10 @@ int			main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	raw_term();
-	if (signal(SIGINT , sig_handler) == SIG_ERR)
+	g_win = 0;
+	if (signal(SIGWINCH , &sig_handler2) == SIG_ERR)
 		ft_printf("error");
-	if (signal(SIGWINCH, sig_handler) == SIG_ERR)
+	if (signal(SIGINT , &sig_handler) == SIG_ERR)
 		ft_printf("error");
 	ft_select(&argv[1]);
 	default_term();

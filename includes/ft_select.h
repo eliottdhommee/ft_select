@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:18:16 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/16 19:10:32 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/19 12:44:45 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <termcap.h>
 # include <termios.h>
 # include <term.h>
+# include <sys/ioctl.h>
 # define KEY_SPACE "\x20\0\0\0\0\0"
 # define KEY_ESC "\x1b\0\0\0\0\0"
 # define KEY_RET "\xa\0\0\0\0\0"
@@ -39,12 +40,15 @@ typedef struct	s_content
 	int			is_selected;
 }				t_content;
 
+int			g_win;
+
 int			ft_select(char **arg);
 void		raw_term(void);
 void		default_term(void);
 int			putchar_tput(int c);
 
 void		sig_handler(int signo);
+void		sig_handler2(int signo);
 
 t_list		*get_list(char **args);
 t_content	*get_pos(t_list *list, int x, int y, t_term *var);
