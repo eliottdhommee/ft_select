@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 14:58:33 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/19 12:09:20 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/24 15:14:52 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,19 @@ int			putchar_tput(int c)
 	return (write(1, &c, 1));
 }
 
-t_term		*update_var(t_list *begin, t_term *var)
+int			get_col(void)
 {
 	struct winsize ws;
 
 	ioctl(0, TIOCGWINSZ, &ws);
+	return (ws.ws_col);
+}
+
+t_term		*update_var(t_list *begin, t_term *var)
+{
 	var->size = ft_lstsize(begin);
 	var->max_len = max_len(begin) + 1;
-	var->col = ws.ws_col / var->max_len;
+	var->col = get_col() / (var->max_len + 1);
 	var->line = var->size / var->col;
 	if (var->size % var->col > 0)
 		var->line++;

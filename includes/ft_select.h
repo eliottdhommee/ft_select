@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:18:16 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/19 12:44:45 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/24 15:15:21 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,16 @@ typedef struct	s_term
 	int			pos_x;
 	int			pos_y;
 	int			max_len;
+	int			end;
 }				t_term;
+
+int				g_win;
 
 typedef struct	s_content
 {
 	char		*name;
 	int			is_selected;
 }				t_content;
-
-int			g_win;
 
 int			ft_select(char **arg);
 void		raw_term(void);
@@ -60,6 +61,7 @@ t_term		*reprint(t_list *begin, t_term *var);
 int			max_len(t_list *begin);
 t_term		*init_var(void);
 t_term		*update_var(t_list *begin, t_term *var);
+int			get_col(void);
 t_content	*new_content(char *name);
 void		del_content(void *content);
 

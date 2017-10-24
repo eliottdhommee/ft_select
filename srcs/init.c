@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 17:34:14 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/15 19:30:32 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/24 13:38:46 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ t_term		*init_var(void)
 	var->pos_x = 0;
 	var->pos_y = 0;
 	var->max_len = 0;
+	var->end = 0;
 	return (var);
 }
