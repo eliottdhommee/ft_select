@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:18:16 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/24 15:15:21 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/26 16:01:04 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ typedef struct	s_content
 int			ft_select(char **arg);
 void		raw_term(void);
 void		default_term(void);
+void		close_term(t_term *var);
 int			putchar_tput(int c);
 
 void		sig_handler(int signo);
-void		sig_handler2(int signo);
 
 t_list		*get_list(char **args);
 t_content	*get_pos(t_list *list, int x, int y, t_term *var);
+void		return_selec(t_list *begin_list);
 
 t_term		*print_one(t_content *data, t_term *var, int opt);
 t_term		*print_col(t_list *begin, t_term *var);

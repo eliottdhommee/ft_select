@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 14:58:33 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/24 15:14:52 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/26 12:29:47 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			max_len(t_list *begin)
 
 int			putchar_tput(int c)
 {
-	return (write(1, &c, 1));
+	return (write(2, &c, 1));
 }
 
 int			get_col(void)

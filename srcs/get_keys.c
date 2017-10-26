@@ -6,11 +6,12 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/10 18:35:31 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/24 13:57:27 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/26 13:03:14 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
+
 t_term		*do_space(t_list *list, t_term *var)
 {
 	t_content		*tmp;
@@ -50,9 +51,13 @@ t_term		*get_keys(char *str , t_term *var, t_list **list)
 	else if (ft_memcmp((void*)KEY_SPACE, (void*)str, 6) == 0)
 		var = do_space(*list, var);
 	else if (ft_memcmp((void*)KEY_ESC, (void*)str, 6) == 0)
-		ft_printf("echap\n");
+		g_win = 2;
 	else if (ft_memcmp((void*)KEY_RET, (void*)str, 6) == 0)
-		ft_printf("echap\n");
+	{
+		close_term(var);
+		return_selec(*list);
+		exit(0);
+	}
 	else if (ft_memcmp((void*)KEY_BCK, (void*)str, 6) == 0)
 		var = do_rmone(list, var);
 	else if (ft_memcmp((void*)KEY_DEL, (void*)str, 6) == 0)

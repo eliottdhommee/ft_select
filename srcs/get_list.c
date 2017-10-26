@@ -6,18 +6,18 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 18:29:32 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/15 17:07:29 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/26 14:57:36 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-int			cmp_content(void *data1, void *data2)
+static int			cmp_content(void *data1, void *data2)
 {
 	return (ft_strcmp(((t_content*)data1)->name, ((t_content*)data2)->name));
 }
 
-t_content	*get_pos(t_list *list, int y, int x, t_term *var)
+t_content			*get_pos(t_list *list, int y, int x, t_term *var)
 {
 	t_list		*tmp;
 
@@ -29,7 +29,7 @@ t_content	*get_pos(t_list *list, int y, int x, t_term *var)
 	return (NULL);
 }
 
-t_list		*get_list(char **args)
+t_list				*get_list(char **args)
 {
 	t_list		*begin;
 	t_content	*tmp;
@@ -44,4 +44,17 @@ t_list		*get_list(char **args)
 		i++;
 	}
 	return (begin);
+}
+
+void		return_selec(t_list *begin_list)
+{
+	t_list		*tmp;
+
+	tmp = begin_list;
+	while (tmp)
+	{
+		if (((t_content*)tmp->data)->is_selected == 1)
+			ft_printf("%w%s ", 1, ((t_content*)tmp->data)->name);
+		tmp = tmp->next;
+	}
 }
