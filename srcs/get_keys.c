@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/10 18:35:31 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/31 15:37:47 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/31 19:28:48 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ t_term		*do_rmone(t_list **list, t_term *var)
 	return (var);
 }
 
+t_term		*ft_pause(t_term *var)
+{
+	var = upnleft(var);
+	tputs(tgetstr("cd", NULL), 0, putchar_tput);
+	default_term();
+	ioctl(0, TIOCSTI, KEY_Z);
+	return (var);
+}
+
 t_term		*get_keys(char *str, t_term *var, t_list **list)
 {
 	if (is_up(str))
@@ -53,16 +62,11 @@ t_term		*get_keys(char *str, t_term *var, t_list **list)
 	else if (ft_memcmp((void*)KEY_ESC, (void*)str, 6) == 0 ||
 			ft_memcmp((void*)KEY_C, (void*)str, 6) == 0 ||
 			ft_memcmp((void*)KEY_SLASH, (void*)str, 6) == 0)
-	{
-		close_term(var);
-		exit(0);
-	}
+		close_term(var, NULL);
 	else if (ft_memcmp((void*)KEY_RET, (void*)str, 6) == 0)
-	{
-		close_term(var);
-		return_selec(*list);
-		exit(0);
-	}
+		close_term(var, *list);
+	else if (ft_memcmp((void*)KEY_Z, (void*)str, 6) == 0)
+		var = ft_pause(var);
 	else if (ft_memcmp((void*)KEY_BCK, (void*)str, 6) == 0)
 		var = do_rmone(list, var);
 	else if (ft_memcmp((void*)KEY_DEL, (void*)str, 6) == 0)

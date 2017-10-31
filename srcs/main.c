@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:22:53 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/31 15:36:08 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/31 19:37:02 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			ft_select(char **arg)
 	{
 		var = init_var();
 		begin_list = get_list(arg);
-		print_col(begin_list, var);
+		var = print_col(begin_list, var);
 	}
 	else
 		var = reprint(begin_list, var);
@@ -32,10 +32,8 @@ int			ft_select(char **arg)
 		read(0, buf, 6);
 		var = get_keys(buf, var, &begin_list);
 		if (!begin_list)
-			g_win = 2;
+			close_term(var, NULL);
 	}
-	if (g_win == 2)
-		close_term(var);
 	return (0);
 }
 
@@ -43,15 +41,10 @@ int			main(int argc, char **argv)
 {
 	if (argc < 2)
 		return (0);
+	if (!ft_getenv("TERM"))
+		return (0);
 	raw_term();
-	if (signal(SIGWINCH, &sig_handler) == SIG_ERR)
-		ft_printf("error");
-	if (signal(SIGINT, &sig_handler) == SIG_ERR)
-		ft_printf("error");
-	if (signal(SIGQUIT, &sig_handler) == SIG_ERR)
-		ft_printf("error");
-	if (signal(SIGCONT, &sig_handler) == SIG_ERR)
-		ft_printf("error");
+	catch_sig();
 	while (g_win != 2)
 	{
 		g_win = 0;

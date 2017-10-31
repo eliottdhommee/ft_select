@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 16:57:14 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/31 15:52:45 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/31 18:36:08 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,15 @@ t_term		*print_col(t_list *begin, t_term *var)
 	t_list	*tmp;
 
 	var = update_var(begin, var);
-	if (var->line > get_line())
-		return (var);
 	i = 0;
 	while (i < var->line)
 	{
 		j = 0;
-		while (j < var->col && (tmp = ft_list_at(begin, 1 + i + j++ * var->line)))
+		while (j < var->col && (tmp = ft_list_at(begin, 1 + i + j * var->line)))
+		{
 			var = print_one((t_content*)tmp->data, var, 0);
+			j++;
+		}
 		if (i != var->line - 1)
 		{
 			ft_putchar_fd('\n', 2);

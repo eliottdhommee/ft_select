@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 12:34:58 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/31 15:47:36 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/31 18:39:39 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ void		default_term(void)
 	tputs(tgetstr("ve", NULL), 0, putchar_tput);
 }
 
-void		close_term(t_term *var)
+void		close_term(t_term *var, t_list *list)
 {
 	var = upnleft(var);
 	tputs(tgetstr("cd", NULL), 0, putchar_tput);
 	default_term();
+	if (list)
+		return_selec(list);
+	exit(0);
 }

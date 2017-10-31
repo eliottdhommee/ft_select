@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 14:58:33 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/31 13:50:02 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/31 18:30:52 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ t_term		*update_var(t_list *begin, t_term *var)
 	var->size = ft_lstsize(begin);
 	var->max_len = max_len(begin) + 1;
 	var->col = get_col() / (var->max_len + 1);
-	var->line = var->size / var->col;
-	if (var->size % var->col > 0)
+	if (var->col > 0)
+		var->line = var->size / var->col;
+	if (var->col > 0 && var->size % var->col > 0)
 		var->line++;
 	return (var);
 }

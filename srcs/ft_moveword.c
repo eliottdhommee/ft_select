@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 17:13:03 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/31 15:46:24 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/31 18:24:07 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ t_term		*beginline(t_term *var)
 
 t_term		*upnleft(t_term *var)
 {
-	var = beginline(var);
-	while (var->pos_y > 0)
-		var = ft_cursup(var);
+	tputs(tgetstr("ho", NULL), 0, putchar_tput);
+	var->pos_x = 0;
+	var->pos_y = 0;
 	return (var);
 }
