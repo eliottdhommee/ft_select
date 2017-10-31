@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:22:53 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/26 16:12:58 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/31 15:36:08 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int			main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	raw_term();
-	if (signal(SIGWINCH , &sig_handler) == SIG_ERR)
+	if (signal(SIGWINCH, &sig_handler) == SIG_ERR)
 		ft_printf("error");
-	if (signal(SIGINT , &sig_handler) == SIG_ERR)
+	if (signal(SIGINT, &sig_handler) == SIG_ERR)
 		ft_printf("error");
-	if (signal(SIGQUIT , &sig_handler) == SIG_ERR)
+	if (signal(SIGQUIT, &sig_handler) == SIG_ERR)
 		ft_printf("error");
-	if (signal(SIGCONT , &sig_handler) == SIG_ERR)
+	if (signal(SIGCONT, &sig_handler) == SIG_ERR)
 		ft_printf("error");
 	while (g_win != 2)
 	{

@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 14:58:33 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/26 12:29:47 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/31 13:50:02 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ int			get_col(void)
 
 	ioctl(0, TIOCGWINSZ, &ws);
 	return (ws.ws_col);
+}
+
+int			get_line(void)
+{
+	struct winsize ws;
+
+	ioctl(0, TIOCGWINSZ, &ws);
+	return (ws.ws_row);
 }
 
 t_term		*update_var(t_list *begin, t_term *var)

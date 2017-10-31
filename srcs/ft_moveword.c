@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 17:13:03 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/15 18:20:07 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/31 15:46:24 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,7 @@ t_term		*ft_goto(t_list *list, t_term *var, int x, int y)
 			return (var);
 	}
 	var = print_one(get_pos(list, var->pos_x, var->pos_y, var), var, 0);
-	while (var->pos_x < x)
-		var = ft_curright(var);
-	while (var->pos_x > x)
-		var = ft_curleft(var);
-	while (var->pos_y < y)
-		var = ft_curdwn(var);
-	while (var->pos_y > y)
-		var = ft_cursup(var);
-	var = print_one(tmp, var, 1);
-	var = ft_curleft(var);
+	var = reprint_one(tmp, var, x, y);
 	return (var);
 }
 

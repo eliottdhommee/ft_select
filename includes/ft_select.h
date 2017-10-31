@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:18:16 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/26 16:01:04 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/31 15:45:47 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # define KEY_RET "\xa\0\0\0\0\0"
 # define KEY_BCK "\x7f\0\0\0\0\0"
 # define KEY_DEL "\x1b\x5b\x33\x7e\0\0"
+# define KEY_C "\x3\0\0\0\0\0"
+# define KEY_Z "\x1a\0\0\0\0\0"
+# define KEY_SLASH "\x1c\0\0\0\0\0"
 
 typedef struct	s_term
 {
@@ -58,11 +61,13 @@ void		return_selec(t_list *begin_list);
 t_term		*print_one(t_content *data, t_term *var, int opt);
 t_term		*print_col(t_list *begin, t_term *var);
 t_term		*reprint(t_list *begin, t_term *var);
+t_term		*reprint_one(t_content *data, t_term *var, int x, int y);
 
 int			max_len(t_list *begin);
 t_term		*init_var(void);
 t_term		*update_var(t_list *begin, t_term *var);
 int			get_col(void);
+int			get_line(void);
 t_content	*new_content(char *name);
 void		del_content(void *content);
 

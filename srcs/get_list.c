@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 18:29:32 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/26 14:57:36 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/10/31 15:35:31 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_list				*get_list(char **args)
 	return (begin);
 }
 
-void		return_selec(t_list *begin_list)
+void				return_selec(t_list *begin_list)
 {
 	t_list		*tmp;
 
