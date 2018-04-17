@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 16:57:14 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/31 18:36:08 by edhommee         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:53:59 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_term		*print_one(t_content *data, t_term *var, int opt)
 
 t_term		*reprint_one(t_content *data, t_term *var, int x, int y)
 {
+	tputs(tgetstr("bl", NULL), 0, putchar_tput);
 	while (var->pos_x < x)
 		var = ft_curright(var);
 	while (var->pos_x > x)
