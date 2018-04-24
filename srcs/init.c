@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 17:34:14 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/24 13:38:46 by edhommee         ###   ########.fr       */
+/*   Updated: 2018/04/24 17:45:55 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ t_term		*init_var(void)
 {
 	t_term		*var;
 
-	var = ft_memalloc(sizeof(t_term*));
+	if (!(var = ft_memalloc(sizeof(t_term*))))
+		return (NULL);
 	var->size = 0;
 	var->col = 0;
 	var->line = 0;

@@ -6,13 +6,13 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:22:53 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/31 19:37:02 by edhommee         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:01:19 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-int			ft_select(char **arg)
+static int			ft_select(char **arg)
 {
 	char				buf[6];
 	static t_term		*var = NULL;

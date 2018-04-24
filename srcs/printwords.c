@@ -6,11 +6,19 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 16:57:14 by edhommee          #+#    #+#             */
-/*   Updated: 2017/12/04 16:53:59 by edhommee         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:00:51 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
+
+t_term		*reprint(t_list *begin, t_term *var)
+{
+	var = upnleft(var);
+	tputs(tgetstr("cd", NULL), 0, putchar_tput);
+	var = print_col(begin, var);
+	return (var);
+}
 
 t_term		*print_one(t_content *data, t_term *var, int opt)
 {
@@ -41,14 +49,6 @@ t_term		*reprint_one(t_content *data, t_term *var, int x, int y)
 	return (var);
 }
 
-t_term		*reprint(t_list *begin, t_term *var)
-{
-	var = upnleft(var);
-	tputs(tgetstr("cd", NULL), 0, putchar_tput);
-	var = print_col(begin, var);
-	return (var);
-}
-
 t_term		*print_col(t_list *begin, t_term *var)
 {
 	int		i;
@@ -60,7 +60,7 @@ t_term		*print_col(t_list *begin, t_term *var)
 	while (i < var->line)
 	{
 		j = 0;
-		while (j < var->col && (tmp = ft_list_at(begin, 1 + i + j * var->line)))
+		while (j < var->col && (tmp = ft_lstat(begin, 1 + i + j * var->line)))
 		{
 			var = print_one((t_content*)tmp->data, var, 0);
 			j++;

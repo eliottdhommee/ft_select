@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_list.c                                         :+:      :+:    :+:   */
+/*   close_term.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/03 18:29:32 by edhommee          #+#    #+#             */
-/*   Updated: 2018/04/24 18:28:17 by edhommee         ###   ########.fr       */
+/*   Created: 2018/04/24 18:35:45 by edhommee          #+#    #+#             */
+/*   Updated: 2018/04/24 18:36:28 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-static int			cmp_content(void *data1, void *data2)
+static void			return_selec(t_list *begin_list)
 {
-	return (ft_strcmp(((t_content*)data1)->name, ((t_content*)data2)->name));
+	t_list		*tmp;
+
+	tmp = begin_list;
+	while (tmp)
+	{
+		if (((t_content*)tmp->data)->is_selected == 1)
+			ft_printf("%w%s ", 1, ((t_content*)tmp->data)->name);
+		tmp = tmp->next;
+	}
 }
 
-t_list				*get_list(char **args)
+void			close_term(t_term *var, t_list *list)
 {
-	t_list		*begin;
-	t_content	*tmp;
-	int			i;
-
-	i = 0;
-	begin = NULL;
-	while (args[i])
-	{
-		tmp = new_content(args[i]);
-		ft_lstinsert(&begin, tmp, &cmp_content);
-		i++;
-	}
-	return (begin);
+	var = upnleft(var);
+	tputs(tgetstr("cd", NULL), 0, putchar_tput);
+	default_term();
+	if (list)
+		return_selec(list);
+	exit(0);
 }

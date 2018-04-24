@@ -6,13 +6,13 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 14:58:33 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/31 18:30:52 by edhommee         ###   ########.fr       */
+/*   Updated: 2018/04/24 18:58:14 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-int			max_len(t_list *begin)
+static int			max_len(t_list *begin)
 {
 	size_t	max;
 
@@ -26,12 +26,7 @@ int			max_len(t_list *begin)
 	return (max + 1);
 }
 
-int			putchar_tput(int c)
-{
-	return (write(2, &c, 1));
-}
-
-int			get_col(void)
+static int			get_col(void)
 {
 	struct winsize ws;
 
@@ -39,7 +34,7 @@ int			get_col(void)
 	return (ws.ws_col);
 }
 
-int			get_line(void)
+static int			get_line(void)
 {
 	struct winsize ws;
 
@@ -52,6 +47,7 @@ t_term		*update_var(t_list *begin, t_term *var)
 	var->size = ft_lstsize(begin);
 	var->max_len = max_len(begin) + 1;
 	var->col = get_col() / (var->max_len + 1);
+	get_line();
 	if (var->col > 0)
 		var->line = var->size / var->col;
 	if (var->col > 0 && var->size % var->col > 0)

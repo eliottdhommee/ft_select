@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 11:18:16 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/31 19:30:52 by edhommee         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:01:16 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 # define FT_SELECT_H
 
 # include <libft.h>
+# include <liblst.h>
 # include <termcap.h>
 # include <termios.h>
 # include <term.h>
 # include <sys/ioctl.h>
-# define KEY_SPACE "\x20\0\0\0\0\0"
-# define KEY_ESC "\x1b\0\0\0\0\0"
-# define KEY_RET "\xa\0\0\0\0\0"
-# define KEY_BCK "\x7f\0\0\0\0\0"
-# define KEY_DEL "\x1b\x5b\x33\x7e\0\0"
-# define KEY_C "\x3\0\0\0\0\0"
-# define KEY_Z "\x1a\0\0\0\0\0"
-# define KEY_SLASH "\x1c\0\0\0\0\0"
 
 typedef struct	s_term
 {
@@ -46,38 +39,25 @@ typedef struct	s_content
 	int			is_selected;
 }				t_content;
 
-int			ft_select(char **arg);
 void		raw_term(void);
 void		default_term(void);
 void		close_term(t_term *var, t_list *list);
-int			putchar_tput(int c);
-
-void		catch_sig(void);
-void		sig_handler(int signo);
-
-t_list		*get_list(char **args);
-t_content	*get_pos(t_list *list, int x, int y, t_term *var);
-void		return_selec(t_list *begin_list);
-
-t_term		*print_one(t_content *data, t_term *var, int opt);
-t_term		*print_col(t_list *begin, t_term *var);
-t_term		*reprint(t_list *begin, t_term *var);
-t_term		*reprint_one(t_content *data, t_term *var, int x, int y);
-
-int			max_len(t_list *begin);
 t_term		*init_var(void);
 t_term		*update_var(t_list *begin, t_term *var);
-int			get_col(void);
-int			get_line(void);
 t_content	*new_content(char *name);
 void		del_content(void *content);
 
-t_term		*get_keys(char *str, t_term *var, t_list **list);
-int			is_up(char *key);
-int			is_down(char *key);
-int			is_left(char *key);
-int			is_right(char *key);
+int			putchar_tput(int c);
+void		catch_sig(void);
+t_list		*get_list(char **args);
+t_content	*get_pos(t_list *list, int y, int x, t_term *var);
 
+t_term		*print_col(t_list *begin, t_term *var);
+t_term		*reprint_one(t_content *data, t_term *var, int x, int y);
+t_term		*print_one(t_content *data, t_term *var, int opt);
+t_term		*reprint(t_list *begin, t_term *var);
+
+t_term		*get_keys(char *str, t_term *var, t_list **list);
 t_term		*ft_goto(t_list *list, t_term *var, int x, int y);
 t_term		*ft_cursup(t_term *var);
 t_term		*ft_curdwn(t_term *var);

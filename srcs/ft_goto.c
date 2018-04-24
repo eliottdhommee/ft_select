@@ -6,13 +6,13 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 17:13:03 by edhommee          #+#    #+#             */
-/*   Updated: 2017/10/31 18:24:07 by edhommee         ###   ########.fr       */
+/*   Updated: 2018/04/24 18:58:51 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-int			rotate_x(int x, int y, t_term *var)
+static int			rotate_x(int x, int y, t_term *var)
 {
 	if (x < 0)
 		x = var->col - 1;
@@ -27,7 +27,7 @@ int			rotate_x(int x, int y, t_term *var)
 	return (x);
 }
 
-int			rotate_y(int x, int y, t_term *var)
+static int			rotate_y(int x, int y, t_term *var)
 {
 	if (x < 0 && y > 0)
 		y = y - 1;
@@ -42,7 +42,19 @@ int			rotate_y(int x, int y, t_term *var)
 	return (y);
 }
 
-t_term		*ft_goto(t_list *list, t_term *var, int x, int y)
+t_content	*get_pos(t_list *list, int y, int x, t_term *var)
+{
+	t_list		*tmp;
+
+	tmp = NULL;
+	if (x >= 0 && x < var->line && y >= 0 && y < var->col)
+		tmp = ft_lstat(list, 1 + x + y * var->line);
+	if (tmp)
+		return ((t_content*)tmp->data);
+	return (NULL);
+}
+
+t_term			*ft_goto(t_list *list, t_term *var, int x, int y)
 {
 	t_content		*tmp;
 	int				z;
@@ -64,20 +76,5 @@ t_term		*ft_goto(t_list *list, t_term *var, int x, int y)
 	}
 	var = print_one(get_pos(list, var->pos_x, var->pos_y, var), var, 0);
 	var = reprint_one(tmp, var, x, y);
-	return (var);
-}
-
-t_term		*beginline(t_term *var)
-{
-	tputs(tgetstr("cr", NULL), 0, putchar_tput);
-	var->pos_x = 0;
-	return (var);
-}
-
-t_term		*upnleft(t_term *var)
-{
-	tputs(tgetstr("ho", NULL), 0, putchar_tput);
-	var->pos_x = 0;
-	var->pos_y = 0;
 	return (var);
 }

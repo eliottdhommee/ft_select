@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_list.c                                         :+:      :+:    :+:   */
+/*   termcaps.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/03 18:29:32 by edhommee          #+#    #+#             */
-/*   Updated: 2018/04/24 18:28:17 by edhommee         ###   ########.fr       */
+/*   Created: 2018/04/24 18:40:25 by edhommee          #+#    #+#             */
+/*   Updated: 2018/04/24 18:40:38 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-static int			cmp_content(void *data1, void *data2)
+t_term		*beginline(t_term *var)
 {
-	return (ft_strcmp(((t_content*)data1)->name, ((t_content*)data2)->name));
+	tputs(tgetstr("cr", NULL), 0, putchar_tput);
+	var->pos_x = 0;
+	return (var);
 }
 
-t_list				*get_list(char **args)
+t_term		*upnleft(t_term *var)
 {
-	t_list		*begin;
-	t_content	*tmp;
-	int			i;
+	tputs(tgetstr("ho", NULL), 0, putchar_tput);
+	var->pos_x = 0;
+	var->pos_y = 0;
+	return (var);
+}
 
-	i = 0;
-	begin = NULL;
-	while (args[i])
-	{
-		tmp = new_content(args[i]);
-		ft_lstinsert(&begin, tmp, &cmp_content);
-		i++;
-	}
-	return (begin);
+int			putchar_tput(int c)
+{
+	return (write(2, &c, 1));
 }
